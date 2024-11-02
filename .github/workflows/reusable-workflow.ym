@@ -26,3 +26,15 @@ jobs:
           echo "Environment: ${{ inputs.environment }}"
           echo "Debug enabled: ${{ inputs.debug_enabled }}"
           echo "Config file: ${{ inputs.config_file }}"
+
+# Caller workflow (main-workflow.yml)
+name: Main Workflow
+on: [push]
+
+jobs:
+  call-reusable-workflow:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with:
+      environment: 'production'
+      debug_enabled: true
+      config_file: 'custom-config.json'
